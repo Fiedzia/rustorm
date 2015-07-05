@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `Pool` struct in crate `rustorm`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, Pool">
+
+    <title>rustorm::database::Pool - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../../main.css">
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <section class="sidebar">
+        
+        <p class='location'><a href='../index.html'>rustorm</a>::<wbr><a href='index.html'>database</a></p><script>window.sidebarCurrent = {name: 'Pool', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+    </section>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press 'S' to search, '?' for more options..."
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content struct">
+<h1 class='fqn'><span class='in-band'>Struct <a href='../index.html'>rustorm</a>::<wbr><a href='index.html'>database</a>::<wbr><a class='struct' href=''>Pool</a><wbr></span><span class='out-of-band'><span id='render-detail'>
+            <a id="collapse-all" href="#">[-]</a>&nbsp;<a id="expand-all" href="#">[+]</a>
+        </span><a id='src-10199' href='../../src/rustorm/database.rs.html#158-163'>[src]</a></span></h1>
+<pre class='rust struct'>pub struct Pool {
+    // some fields omitted
+}</pre><div class='docblock'><p>This pool contains database that are not necessarily same platform and configs
+database pools are stored using treemap, with the key is the url of the database
+owns the database, and only lend out reference when api tries to connect to the database
+TODO: protect the free form here with locks</p>
+</div><h2 id='methods'>Methods</h2><h3 class='impl'><a class='stability Unmarked' title='No stability level'></a><code>impl <a class='struct' href='../../rustorm/database/struct.Pool.html' title='rustorm::database::Pool'>Pool</a></code></h3><div class='impl-items'><h4 id='method.init' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.init' class='fnname'>init</a>() -&gt; Self</code></h4>
+<div class='docblock'><p>initialize a pool for database connection container
+call only once per application</p>
+</div><h4 id='method.reserve' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.reserve' class='fnname'>reserve</a>(url: &amp;<a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>, n: <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; Self</code></h4>
+<h4 id='method.reserve_connection' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.reserve_connection' class='fnname'>reserve_connection</a>(&amp;mut self, url: &amp;<a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>, n: <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a>) -&gt; &amp;mut Self</code></h4>
+<div class='docblock'><p>reserve a number of connections using the url config</p>
+</div><h4 id='method.get_db_with_url' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.get_db_with_url' class='fnname'>get_db_with_url</a>(&amp;mut self, url: &amp;<a href='http://doc.rust-lang.org/nightly/std/primitive.str.html'>str</a>) -&gt; <a class='enum' href='http://doc.rust-lang.org/nightly/core/result/enum.Result.html' title='core::result::Result'>Result</a>&lt;<a class='enum' href='../../rustorm/platform/enum.Platform.html' title='rustorm::platform::Platform'>Platform</a>, <a class='struct' href='http://doc.rust-lang.org/nightly/collections/string/struct.String.html' title='collections::string::String'>String</a>&gt;</code></h4>
+<div class='docblock'><p>exposed api to get connection from a pooled connection</p>
+</div><h4 id='method.release' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.release' class='fnname'>release</a>(&amp;mut self, platform: <a class='enum' href='../../rustorm/platform/enum.Platform.html' title='rustorm::platform::Platform'>Platform</a>) -&gt; &amp;mut Self</code></h4>
+<div class='docblock'><p>release the used connection back to the free pool</p>
+</div><h4 id='method.total_connections' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.total_connections' class='fnname'>total_connections</a>(&amp;self) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a></code></h4>
+<h4 id='method.total_free_connections' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.total_free_connections' class='fnname'>total_free_connections</a>(&amp;self) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a></code></h4>
+<div class='docblock'><p>return the number of free available connection in the pool</p>
+</div><h4 id='method.total_used_connections' class='method'><a class='stability Unmarked' title='No stability level'></a><code>fn <a href='#method.total_used_connections' class='fnname'>total_used_connections</a>(&amp;self) -&gt; <a href='http://doc.rust-lang.org/nightly/std/primitive.usize.html'>usize</a></code></h4>
+<div class='docblock'><p>return the number of free available connection in the pool</p>
+</div></div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <div id="help" class="hidden">
+        <div class="shortcuts">
+            <h1>Keyboard shortcuts</h1>
+            <dl>
+                <dt>?</dt>
+                <dd>Show this help dialog</dd>
+                <dt>S</dt>
+                <dd>Focus the search field</dd>
+                <dt>&larrb;</dt>
+                <dd>Move up in search results</dd>
+                <dt>&rarrb;</dt>
+                <dd>Move down in search results</dd>
+                <dt>&#9166;</dt>
+                <dd>Go to active search result</dd>
+            </dl>
+        </div>
+        <div class="infos">
+            <h1>Search tricks</h1>
+            <p>
+                Prefix searches with a type followed by a colon (e.g.
+                <code>fn:</code>) to restrict the search to a given type.
+            </p>
+            <p>
+                Accepted types are: <code>fn</code>, <code>mod</code>,
+                <code>struct</code>, <code>enum</code>,
+                <code>trait</code>, <code>typedef</code> (or
+                <code>tdef</code>).
+            </p>
+        </div>
+    </div>
+
+    
+
+    <script>
+        window.rootPath = "../../";
+        window.currentCrate = "rustorm";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../../jquery.js"></script>
+    <script src="../../main.js"></script>
+    
+    <script async src="../../search-index.js"></script>
+</body>
+</html>

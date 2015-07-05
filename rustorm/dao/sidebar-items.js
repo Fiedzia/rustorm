@@ -1,0 +1,1 @@
+initSidebarItems({"enum":[["Type","supported generic datatypes for an ORM"]],"trait":[["FromType",""],["IsDao","trait for converting dao to model sized and clonable"],["ToType",""]],"struct":[["Dao",""],["DaoResult","meta result of a query useful when doing complex query, and also with paging"]]});
